@@ -2,12 +2,6 @@ import mongoose from "mongoose";
 
 const MONGODB_URI = process.env.MONGODB_URI;
 
-if (!MONGODB_URI) {
-  throw new Error(
-    "Please define the MONGODB_URI environment variable inside .env.local",
-  );
-}
-
 // Define a type for our cached connection
 interface MongooseCache {
   conn: typeof mongoose | null;
@@ -37,6 +31,12 @@ async function dbConnect(): Promise<typeof mongoose> {
 
   // If no promise exists, create a new connection
   if (!cached.promise) {
+    if (!MONGODB_URI) {
+      throw new Error(
+        "Please define the MONGODB_URI environment variable inside .env.local",
+      );
+    }
+
     const opts = {
       bufferCommands: false, // Disable buffering for immediate errors in serverless
     };
