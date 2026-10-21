@@ -22,6 +22,9 @@ export const metadata: Metadata = {
   description: "The hub for every developer.",
 };
 
+// daydevmm_db_user
+// xW3KuF8gD0maBWFb
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
